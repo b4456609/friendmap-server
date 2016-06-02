@@ -20,7 +20,7 @@ RESPONSE: WebSocket rocks
 DISCONNECTED
 ```
 
-### 開發新能
+### 開發新功能
 為了在開發新功能後在master branch可以運作
 
 1. 在開發新功能，建議開一個新的git branch
