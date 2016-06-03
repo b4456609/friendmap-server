@@ -69,8 +69,7 @@ public class FriendmapController {
 			System.out.println("addUser");
 			String name = json.getString("name");
 			String id = json.getString("id");			
-			break;
-			
+			break;			
 		default:
 			System.out.println("Type error");
 		}
