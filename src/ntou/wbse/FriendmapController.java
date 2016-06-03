@@ -70,6 +70,7 @@ public class FriendmapController {
 			String name = json.getString("name");
 			String id = json.getString("id");			
 			break;
+			
 		default:
 			System.out.println("Type error");
 		}
