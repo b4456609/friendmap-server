@@ -69,7 +69,47 @@ public class FriendmapController {
 			System.out.println("addUser");
 			String name = json.getString("name");
 			String id = json.getString("id");			
-			break;			
+			break;
+		case "createGroup":
+			System.out.println("createGroup");
+			String groupName = json.getString("name");
+			String groupId = json.getString("id");			
+			break;
+		case "searchPeople":
+			System.out.println("searchPeople");
+			String searchName = json.getString("search");
+			break;
+		case "addUser2Group":
+			System.out.println("addUser2Group");
+			String aUserId = json.getString("userId");
+			String aGroupId = json.getString("groupId");		
+			break;
+		case "leaveGroup":
+			System.out.println("leaveGroup");
+			String lUserId = json.getString("userId");
+			String lGroupId = json.getString("groupId");
+			break;
+		case "updateLocation":
+			System.out.println("updateLocation");
+			String ulUserId = json.getString("userId");
+			double lon = json.getDouble("lon");
+			double lat = json.getDouble("lat");
+			long ulTimestamp = json.getLong("timestamp");
+			break;
+		case "updateAcceleration":
+			System.out.println("updateAcceleration");
+			String uaUserId = json.getString("userId");
+			double x = json.getDouble("x");
+			double y = json.getDouble("y");
+			double z = json.getDouble("z");
+			long uaTimestamp = json.getLong("timestamp");
+			break;
+		case "updateStatus":
+			System.out.println("updateStatus");
+			String usUserId = json.getString("userId");
+			String status = json.getString("status");
+			long usTimestamp = json.getLong("timestamp");
+			break;
 		default:
 			System.out.println("Type error");
 		}
