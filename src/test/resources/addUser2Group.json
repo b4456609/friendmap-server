@@ -1,0 +1,15 @@
+{
+  "type": "addUser2Group",
+  "status": "success",
+  "groupId":1464767827233,
+  "user": [
+    {
+      "name": "王建民",
+      "id": "2134548458"
+    },
+    {
+      "name": "陳偉殷",
+      "id": "2134548453"
+    }
+  ]
+}

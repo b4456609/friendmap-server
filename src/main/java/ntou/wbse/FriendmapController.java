@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 @ServerEndpoint(value = "/test")
 public class FriendmapController {
-	private static final Logger logger = LoggerFactory.getLogger(FriendmapController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FriendmapController.class);
 	private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 	private App app = App.getInstance();
 
@@ -55,7 +55,7 @@ public class FriendmapController {
 	 */
 	@OnMessage
 	public void onMessage(String message, Session userSession) {
-		logger.debug("Message Received: " + message);
+		LOGGER.debug("Message Received: " + message);
 		// json資料開頭是{
 		if (message.startsWith("{")) {
 			JSONObject json = new JSONObject(message);
@@ -71,7 +71,7 @@ public class FriendmapController {
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
-			logger.debug("addUser");
+			LOGGER.debug("addUser");
 			String name = json.getString("name");
 			String id = json.getString("id");
 			app.login(userSession, id, name);

@@ -6,11 +6,14 @@ import javax.websocket.Session;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
  */
 public class App {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FriendmapController.class);
 
 	/**
 	 * 
@@ -69,7 +72,11 @@ public class App {
 	public void createGroup(String name, long id, String userId) {
 		User owner = userIdusers.get(userId);
 		Group group = new Group(name, id, owner);
+		// add to group list
 		groups.add(group);
+		// add to user id to group map
+		userIdGroup.put(userId, group);
+		// delete this user from waittinguser
 		for (User user : waittingUsers) {
 			if (user.getId().equals(userId)) {
 				waittingUsers.remove(user);
@@ -92,20 +99,16 @@ public class App {
 				break;
 			}
 		}
-		for (User u : waittingUsers) {
-			if (u.getId().equals(userId)) {
-				user = u;
-				break;
-			}
-		}
-		System.out.println(group);
-		System.out.println(user);
+		user = userIdusers.get(userId);
+		LOGGER.debug(user.toString());
+		LOGGER.debug(group.toString());
 		waittingUsers.remove(user);
 		group.addUser2Group(user);
-		sendAddUser2Group(true, group, null);
+		String json = user2GroupJson(true, group, null);
+		group.sendMessage2All(json);
 	}
 
-	private void sendAddUser2Group(boolean b, Group group, String message) {
+	public String user2GroupJson(boolean b, Group group, String message) {
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		for (User user : group.getMembers()) {
@@ -120,7 +123,7 @@ public class App {
 		jsonObj.put("groupId", group.getId());
 		jsonObj.put("user", jsonArray);
 
-		group.sendMessage2All(jsonObj.toString());
+		return jsonObj.toString();
 	}
 
 	/**

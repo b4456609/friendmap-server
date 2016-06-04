@@ -38,13 +38,13 @@
 			<artifactId>json</artifactId>
 			<version>20160212</version>
 		</dependency>
-
+		<!-- http://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<version>4.12</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
