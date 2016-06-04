@@ -11,9 +11,12 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ServerEndpoint(value = "/test")
 public class FriendmapController {
+	private static final Logger logger = LoggerFactory.getLogger(FriendmapController.class);
 	private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 	private App app = App.getInstance();
 
@@ -52,7 +55,7 @@ public class FriendmapController {
 	 */
 	@OnMessage
 	public void onMessage(String message, Session userSession) {
-		System.out.println("Message Received: " + message);
+		logger.debug("Message Received: " + message);
 		// json資料開頭是{
 		if (message.startsWith("{")) {
 			JSONObject json = new JSONObject(message);
@@ -68,7 +71,7 @@ public class FriendmapController {
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
-			System.out.println("addUser");
+			logger.debug("addUser");
 			String name = json.getString("name");
 			String id = json.getString("id");
 			app.login(userSession, id, name);
