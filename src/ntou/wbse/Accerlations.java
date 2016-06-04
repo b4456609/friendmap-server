@@ -37,4 +37,10 @@ public class Accerlations {
 		this.accerlations = accerlations;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Accerlations [accerlations=" + accerlations + "]";
+	}
+
 }

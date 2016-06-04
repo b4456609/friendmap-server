@@ -116,4 +116,9 @@ public class User {
 		this.accerlations = accerlations;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", gps=" + gps + ", accerlations=" + accerlations + "]";
+	}
+
 }

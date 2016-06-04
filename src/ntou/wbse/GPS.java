@@ -37,4 +37,10 @@ public class GPS {
 		this.locations = locations;
 	}
 
+
+	@Override
+	public String toString() {
+		return "GPS [locations=" + locations + "]";
+	}
+
 }

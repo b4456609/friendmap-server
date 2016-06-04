@@ -102,4 +102,9 @@ public class Group {
 		this.owner = owner;
 	}
 
+	@Override
+	public String toString() {
+		return "Group [name=" + name + ", id=" + id + ", members=" + members + ", owner=" + owner + "]";
+	}
+
 }

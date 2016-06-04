@@ -53,4 +53,9 @@ public class Location {
 		this.timestamp = timestamp;
 	}
 
+	@Override
+	public String toString() {
+		return "Location [lon=" + lon + ", lat=" + lat + ", timestamp=" + timestamp + "]";
+	}
+
 }
