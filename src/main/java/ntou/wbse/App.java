@@ -83,7 +83,8 @@ public class App {
 				break;
 			}
 		}
-		sendCreateGroupResult(owner, true, null);
+		String json = createGroupResultJson( true, null);
+		owner.sendMessage(json);
 	}
 
 	/**
@@ -166,21 +167,23 @@ public class App {
 	 * @param user
 	 * @param isSuccess
 	 * @param message
+	 * @return 
 	 */
-	private void sendCreateGroupResult(User user, boolean isSuccess, String message) {
+	private String createGroupResultJson(boolean isSuccess, String message) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("type", "CreateGroupResult");
 		if (isSuccess == true) {
 			jsonObj.put("status", "success");
 		}
-		user.sendMessage(jsonObj.toString());
+		return jsonObj.toString();
 	}
 
 	/**
 	 * @param userSession
 	 * @param users
+	 * @return 
 	 */
-	public void sendSearchResult(Session userSession) {
+	public String searchResultjson() {
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		for (User user : waittingUsers) {
@@ -193,7 +196,7 @@ public class App {
 		jsonObj.put("type", "searchPeopleResult");
 		jsonObj.put("search", jsonArray);
 
-		userSession.getAsyncRemote().sendText(jsonObj.toString());
+		return jsonObj.toString();
 	}
 
 	/**
@@ -202,7 +205,7 @@ public class App {
 	 * @param lat
 	 * @param timestamp
 	 */
-	private void sendUpdateLocation(String userId, double lon, double lat, long timestamp) {
+	private void updateLocationJson(String userId, double lon, double lat, long timestamp) {
 		// TODO implement here
 	}
 
@@ -213,7 +216,7 @@ public class App {
 	 * @param z
 	 * @param timestamp
 	 */
-	private void sendUpdateAcceleration(String userId, double x, double y, double z, long timestamp) {
+	private void endUpdateAccelerationJson(String userId, double x, double y, double z, long timestamp) {
 		// TODO implement here
 	}
 
@@ -222,7 +225,7 @@ public class App {
 	 * @param status
 	 * @param timestamp
 	 */
-	private void sendUpdateStatus(String userId, String status, long timestamp) {
+	private void updateStatusJson(String userId, String status, long timestamp) {
 		// TODO implement here
 	}
 

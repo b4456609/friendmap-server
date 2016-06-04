@@ -87,7 +87,8 @@ public class FriendmapController {
 			break;
 		case "searchPeople":
 			System.out.println("searchPeople");
-			app.sendSearchResult(userSession);
+			String searchResultjson = app.searchResultjson();
+			userSession.getAsyncRemote().sendText(searchResultjson);
 			break;
 		case "addUser2Group":
 			System.out.println("addUser2Group");
