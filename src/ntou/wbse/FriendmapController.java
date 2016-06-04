@@ -15,6 +15,7 @@ import org.json.JSONObject;
 @ServerEndpoint(value = "/test")
 public class FriendmapController {
 	private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
+	private App app = App.getInstance();
 
 	/**
 	 * Callback hook for Connection open events. This method will be invoked
@@ -56,33 +57,40 @@ public class FriendmapController {
 		if (message.startsWith("{")) {
 			JSONObject json = new JSONObject(message);
 			System.out.println(json);
-			dispatch(json);
+			dispatch(json, userSession);
 		} else {
 			userSession.getAsyncRemote().sendText(message);
 		}
 	}
 
-	private void dispatch(JSONObject json) {
+	private void dispatch(JSONObject json, Session userSession) {
+		System.out.println(app);
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
 			System.out.println("addUser");
 			String name = json.getString("name");
-			String id = json.getString("id");			
+			String id = json.getString("id");
+			app.login(userSession, id, name);
+			System.out.println(app);
 			break;
 		case "createGroup":
 			System.out.println("createGroup");
+			String userId = json.getString("userId");
 			String groupName = json.getString("name");
-			String groupId = json.getString("id");			
+			long groupId = json.getLong("id");
+			app.createGroup(groupName, groupId, userId);
+			System.out.println(app);
 			break;
 		case "searchPeople":
 			System.out.println("searchPeople");
-			String searchName = json.getString("search");
+			app.sendSearchResult(userSession);
 			break;
 		case "addUser2Group":
 			System.out.println("addUser2Group");
 			String aUserId = json.getString("userId");
-			String aGroupId = json.getString("groupId");		
+			long aGroupId = json.getLong("groupId");
+			app.addUser2Group(aUserId, aGroupId);
 			break;
 		case "leaveGroup":
 			System.out.println("leaveGroup");
@@ -114,5 +122,5 @@ public class FriendmapController {
 			System.out.println("Type error");
 		}
 	}
-	
+
 }
