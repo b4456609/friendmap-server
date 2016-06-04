@@ -27,4 +27,14 @@ public class Accerlations {
         // TODO implement here
     }
 
+
+	public List<Accerlation> getAccerlations() {
+		return accerlations;
+	}
+
+
+	public void setAccerlations(List<Accerlation> accerlations) {
+		this.accerlations = accerlations;
+	}
+
 }
