@@ -2,10 +2,6 @@ package ntou.wbse;
 
 import java.util.*;
 
-import javax.websocket.Session;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,16 +84,6 @@ public class App {
 		return instance;
 	}
 
-	/**
-	 * @param id
-	 * @param name
-	 */
-	public void login(Session session, String id, String name) {
-		User user = new User(session, id, name);
-		waittingUsers.add(user);
-		userIdusers.put(id, user);
-	}
-
 	public Group getGroupById(long id){
 		Group group = null;
 		for (Group g : groups) {
@@ -106,98 +92,6 @@ public class App {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * @param userId
-	 */
-	public void userLeaveGroup(String userId) {
-		// TODO implement here
-		// 用userId去userIdGroup裡面找group
-		//把這個user物件從group刪除
-		//把這個user加入到waittinguser
-	}
-
-	/**
-	 * @param id
-	 * @param lon
-	 * @param lat
-	 * @param timestamp
-	 */
-	public void updateUserLocation(String id, double lon, double lat, long timestamp) {
-		// TODO implement here
-		//找到user物件更新gps位置
-		//通知所有群組內的人除了他自己 gps座標
-	}
-
-	/**
-	 * @param id
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param timestamp
-	 */
-	public void updateUserAccerlation(String id, double x, double y, double z, long timestamp) {
-		// TODO implement here
-	}
-
-	/**
-	 * @param id
-	 * @param status
-	 */
-	public void updateUserStatus(String id, String status) {
-		// TODO implement here
-	}
-
-	/**
-	 * @param userSession
-	 * @param users
-	 * @return 
-	 */
-	public String searchResultjson() {
-		JSONObject jsonObj = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		for (User user : waittingUsers) {
-			JSONObject userObj = new JSONObject();
-			userObj.put("name", user.getName());
-			userObj.put("id", user.getId());
-			jsonArray.put(userObj);
-		}
-
-		jsonObj.put("type", "searchPeopleResult");
-		jsonObj.put("search", jsonArray);
-
-		return jsonObj.toString();
-	}
-
-	/**
-	 * @param userId
-	 * @param lon
-	 * @param lat
-	 * @param timestamp
-	 */
-	public void updateLocationJson(String userId, double lon, double lat, long timestamp) {
-		// TODO implement here
-	}
-
-	/**
-	 * @param userId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param timestamp
-	 */
-	public void endUpdateAccelerationJson(String userId, double x, double y, double z, long timestamp) {
-		// TODO implement here
-	}
-
-	/**
-	 * @param userId
-	 * @param status
-	 * @param timestamp
-	 */
-	public void updateStatusJson(String userId, String status, long timestamp) {
-		// TODO implement here
 	}
 
 	@Override

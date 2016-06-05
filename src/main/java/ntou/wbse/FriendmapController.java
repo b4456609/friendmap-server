@@ -20,6 +20,7 @@ public class FriendmapController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FriendmapController.class);
 	private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 	private App app = App.getInstance();
+	private Strategy strategy;
 
 	/**
 	 * Callback hook for Connection open events. This method will be invoked
@@ -69,7 +70,6 @@ public class FriendmapController {
 
 	private void dispatch(JSONObject json, Session userSession) {
 		System.out.println(app);
-		Strategy strategy;
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
