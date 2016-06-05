@@ -14,12 +14,12 @@ public class App {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FriendmapController.class);
 
 	/**
-	 * 
+	 * map userid to group key value pair
 	 */
 	private Map<String, Group> userIdGroup;
 
 	/**
-	 * 
+	 * all groups
 	 */
 	private List<Group> groups;
 
