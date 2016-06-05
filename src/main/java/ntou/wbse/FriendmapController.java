@@ -69,28 +69,31 @@ public class FriendmapController {
 	}
 
 	private void dispatch(JSONObject json, Session userSession) {
-		LOGGER.debug(app.toString());
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
 			LOGGER.debug("addUser");
 			strategy = new AddUserStrategy(app, json, userSession);
 			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "createGroup":
 			LOGGER.debug("createGroup");
 			strategy = new CreateGroupStrategy(app, json);
 			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "searchPeople":
 			LOGGER.debug("searchPeople");
 			strategy = new SearchPeopleStrategy(app, userSession);
 			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "addUser2Group":
 			LOGGER.debug("addUser2Group");
 			strategy = new AddUser2GroupStrategy(app, json);
 			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "leaveGroup":
 			LOGGER.debug("leaveGroup");

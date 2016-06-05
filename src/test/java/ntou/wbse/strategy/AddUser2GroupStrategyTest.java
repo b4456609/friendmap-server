@@ -24,7 +24,7 @@ public class AddUser2GroupStrategyTest {
         group.addUser2Group(new User(null, "2134548453", "陳偉殷"));
         String jsonFromFile = new JSONObject(TestUtil.getFromFile("addUser2Group.json")).toString();
 
-        assertEquals(jsonFromFile, AddUser2GroupStrategy.responseString(group));
+        assertEquals(jsonFromFile, AddUser2GroupStrategy.responseString(group, true));
     }
 
 }

@@ -25,9 +25,14 @@ public class AddUserStrategy extends ReceviceAndResponse {
 
     @Override
     public void action() {
-        User user = new User(session, id, name);
-        app.getWaittingUsers().add(user);
-        app.getUserIdusers().put(id, user);
+    	if(!app.getUserIdusers().containsKey(id)){
+	        User user = new User(session, id, name);
+	        app.getWaittingUsers().add(user);
+	        app.getUserIdusers().put(id, user);
+    	}
+    	else{
+    		app.getUserIdusers().get(id).setSession(session);
+    	}
     }
 
     @Override

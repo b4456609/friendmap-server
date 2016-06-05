@@ -1,15 +1,18 @@
 package ntou.wbse.strategy;
 
 import ntou.wbse.App;
+import ntou.wbse.FriendmapController;
 import ntou.wbse.Group;
 import ntou.wbse.user.User;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by bernie on 2016/6/5.
  */
 public class CreateGroupStrategy extends ReceviceAndResponse {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(CreateGroupStrategy.class);
     private String userId;
     private String groupName;
     private long groupId;
@@ -36,12 +39,9 @@ public class CreateGroupStrategy extends ReceviceAndResponse {
         // add to user id to group map
         app.getUserIdGroup().put(userId, group);
         // delete this user from waittinguser
-        for (User user : app.getWaittingUsers()) {
-            if (user.getId().equals(userId)) {
-                app.getWaittingUsers().remove(user);
-                break;
-            }
-        }
+        LOGGER.debug( app.getWaittingUsers().toString());
+        app.getWaittingUsers().remove(owner);
+        LOGGER.debug( app.getWaittingUsers().toString());
     }
 
     public static String responseString(boolean isSuccess){
