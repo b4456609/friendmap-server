@@ -2,6 +2,8 @@ package ntou.wbse;
 
 import java.util.*;
 
+import ntou.wbse.user.User;
+
 /**
  * 
  */

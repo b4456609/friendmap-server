@@ -1,4 +1,4 @@
-package ntou.wbse;
+package ntou.wbse.user;
 
 
 import java.util.*;

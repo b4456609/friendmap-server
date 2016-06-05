@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ntou.wbse.user.User;
+
 /**
  * 
  */
@@ -40,6 +42,38 @@ public class App {
 	 */
 	private static App instance = null;
 
+	public Map<String, Group> getUserIdGroup() {
+		return userIdGroup;
+	}
+
+	public void setUserIdGroup(Map<String, Group> userIdGroup) {
+		this.userIdGroup = userIdGroup;
+	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
+	public List<User> getWaittingUsers() {
+		return waittingUsers;
+	}
+
+	public void setWaittingUsers(List<User> waittingUsers) {
+		this.waittingUsers = waittingUsers;
+	}
+
+	public Map<String, User> getUserIdusers() {
+		return userIdusers;
+	}
+
+	public void setUserIdusers(Map<String, User> userIdusers) {
+		this.userIdusers = userIdusers;
+	}
+
 	private App() {
 		userIdGroup = new HashMap<String, Group>();
 		groups = new ArrayList<Group>();
@@ -64,67 +98,14 @@ public class App {
 		userIdusers.put(id, user);
 	}
 
-	/**
-	 * @param name
-	 * @param id
-	 * @param userId
-	 */
-	public void createGroup(String name, long id, String userId) {
-		User owner = userIdusers.get(userId);
-		Group group = new Group(name, id, owner);
-		// add to group list
-		groups.add(group);
-		// add to user id to group map
-		userIdGroup.put(userId, group);
-		// delete this user from waittinguser
-		for (User user : waittingUsers) {
-			if (user.getId().equals(userId)) {
-				waittingUsers.remove(user);
-				break;
-			}
-		}
-		String json = createGroupResultJson( true, null);
-		owner.sendMessage(json);
-	}
-
-	/**
-	 * @param userId
-	 * @param groupId
-	 */
-	public void addUser2Group(String userId, long groupId) {
+	public Group getGroupById(long id){
 		Group group = null;
-		User user = null;
 		for (Group g : groups) {
-			if (g.getId() == groupId) {
-				group = g;
-				break;
+			if (g.getId() == id) {
+				return g;
 			}
 		}
-		user = userIdusers.get(userId);
-		LOGGER.debug(user.toString());
-		LOGGER.debug(group.toString());
-		waittingUsers.remove(user);
-		group.addUser2Group(user);
-		String json = user2GroupJson(true, group, null);
-		group.sendMessage2All(json);
-	}
-
-	public String user2GroupJson(boolean b, Group group, String message) {
-		JSONObject jsonObj = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		for (User user : group.getMembers()) {
-			JSONObject userObj = new JSONObject();
-			userObj.put("name", user.getName());
-			userObj.put("id", user.getId());
-			jsonArray.put(userObj);
-		}
-
-		jsonObj.put("type", "addUser2Group");
-		jsonObj.put("status", "success");
-		jsonObj.put("groupId", group.getId());
-		jsonObj.put("user", jsonArray);
-
-		return jsonObj.toString();
+		return null;
 	}
 
 	/**
@@ -132,6 +113,9 @@ public class App {
 	 */
 	public void userLeaveGroup(String userId) {
 		// TODO implement here
+		// 用userId去userIdGroup裡面找group
+		//把這個user物件從group刪除
+		//把這個user加入到waittinguser
 	}
 
 	/**
@@ -142,6 +126,8 @@ public class App {
 	 */
 	public void updateUserLocation(String id, double lon, double lat, long timestamp) {
 		// TODO implement here
+		//找到user物件更新gps位置
+		//通知所有群組內的人除了他自己 gps座標
 	}
 
 	/**
@@ -161,21 +147,6 @@ public class App {
 	 */
 	public void updateUserStatus(String id, String status) {
 		// TODO implement here
-	}
-
-	/**
-	 * @param user
-	 * @param isSuccess
-	 * @param message
-	 * @return 
-	 */
-	private String createGroupResultJson(boolean isSuccess, String message) {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("type", "CreateGroupResult");
-		if (isSuccess == true) {
-			jsonObj.put("status", "success");
-		}
-		return jsonObj.toString();
 	}
 
 	/**
@@ -205,7 +176,7 @@ public class App {
 	 * @param lat
 	 * @param timestamp
 	 */
-	private void updateLocationJson(String userId, double lon, double lat, long timestamp) {
+	public void updateLocationJson(String userId, double lon, double lat, long timestamp) {
 		// TODO implement here
 	}
 
@@ -216,7 +187,7 @@ public class App {
 	 * @param z
 	 * @param timestamp
 	 */
-	private void endUpdateAccelerationJson(String userId, double x, double y, double z, long timestamp) {
+	public void endUpdateAccelerationJson(String userId, double x, double y, double z, long timestamp) {
 		// TODO implement here
 	}
 
@@ -225,7 +196,7 @@ public class App {
 	 * @param status
 	 * @param timestamp
 	 */
-	private void updateStatusJson(String userId, String status, long timestamp) {
+	public void updateStatusJson(String userId, String status, long timestamp) {
 		// TODO implement here
 	}
 

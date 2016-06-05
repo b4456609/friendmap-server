@@ -10,6 +10,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import ntou.wbse.strategy.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,33 +69,28 @@ public class FriendmapController {
 
 	private void dispatch(JSONObject json, Session userSession) {
 		System.out.println(app);
+		Strategy strategy;
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
 			LOGGER.debug("addUser");
-			String name = json.getString("name");
-			String id = json.getString("id");
-			app.login(userSession, id, name);
-			System.out.println(app);
+			strategy = new AddUserStrategy(app, json, userSession);
+			strategy.execute();
 			break;
 		case "createGroup":
 			System.out.println("createGroup");
-			String userId = json.getString("userId");
-			String groupName = json.getString("name");
-			long groupId = json.getLong("id");
-			app.createGroup(groupName, groupId, userId);
-			System.out.println(app);
+			strategy = new CreateGroupStrategy(app, json);
+			strategy.execute();
 			break;
 		case "searchPeople":
 			System.out.println("searchPeople");
-			String searchResultjson = app.searchResultjson();
-			userSession.getAsyncRemote().sendText(searchResultjson);
+			strategy = new SearchPeopleStrategy(app, userSession);
+			strategy.execute();
 			break;
 		case "addUser2Group":
 			System.out.println("addUser2Group");
-			String aUserId = json.getString("userId");
-			long aGroupId = json.getLong("groupId");
-			app.addUser2Group(aUserId, aGroupId);
+			strategy = new AddUser2GroupStrategy(app, json);
+			strategy.execute();
 			break;
 		case "leaveGroup":
 			System.out.println("leaveGroup");
