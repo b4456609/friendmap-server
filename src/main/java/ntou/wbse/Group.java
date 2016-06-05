@@ -51,7 +51,15 @@ public class Group {
 	 * @param id
 	 */
 	public void userLeave(String id) {
-		// TODO implement here
+		for(User user : members){
+			if(user.getId().equals(id)){
+				members.remove(user);
+				break;
+			}
+		}
+		
+		if(owner.getId().equals(id))
+			owner = null;
 	}
 
 	/**
@@ -59,7 +67,10 @@ public class Group {
 	 * @param message
 	 */
 	public void sendMessageFromUserId(String id, String message) {
-		// TODO implement here
+		for(User user : members){
+			if(!user.getId().equals(id))
+				user.sendMessage(message);
+		}
 	}
 
 	/**
