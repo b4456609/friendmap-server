@@ -69,7 +69,7 @@ public class FriendmapController {
 	}
 
 	private void dispatch(JSONObject json, Session userSession) {
-		System.out.println(app);
+		LOGGER.debug(app.toString());
 		String type = json.getString("type");
 		switch (type) {
 		case "addUser":
@@ -78,34 +78,34 @@ public class FriendmapController {
 			strategy.execute();
 			break;
 		case "createGroup":
-			System.out.println("createGroup");
+			LOGGER.debug("createGroup");
 			strategy = new CreateGroupStrategy(app, json);
 			strategy.execute();
 			break;
 		case "searchPeople":
-			System.out.println("searchPeople");
+			LOGGER.debug("searchPeople");
 			strategy = new SearchPeopleStrategy(app, userSession);
 			strategy.execute();
 			break;
 		case "addUser2Group":
-			System.out.println("addUser2Group");
+			LOGGER.debug("addUser2Group");
 			strategy = new AddUser2GroupStrategy(app, json);
 			strategy.execute();
 			break;
 		case "leaveGroup":
-			System.out.println("leaveGroup");
+			LOGGER.debug("leaveGroup");
 			String lUserId = json.getString("userId");
 			String lGroupId = json.getString("groupId");
 			break;
 		case "updateLocation":
-			System.out.println("updateLocation");
+			LOGGER.debug("updateLocation");
 			String ulUserId = json.getString("userId");
 			double lon = json.getDouble("lon");
 			double lat = json.getDouble("lat");
 			long ulTimestamp = json.getLong("timestamp");
 			break;
 		case "updateAcceleration":
-			System.out.println("updateAcceleration");
+			LOGGER.debug("updateAcceleration");
 			String uaUserId = json.getString("userId");
 			double x = json.getDouble("x");
 			double y = json.getDouble("y");
@@ -113,13 +113,13 @@ public class FriendmapController {
 			long uaTimestamp = json.getLong("timestamp");
 			break;
 		case "updateStatus":
-			System.out.println("updateStatus");
+			LOGGER.debug("updateStatus");
 			String usUserId = json.getString("userId");
 			String status = json.getString("status");
 			long usTimestamp = json.getLong("timestamp");
 			break;
 		default:
-			System.out.println("Type error");
+			LOGGER.debug("Type error");
 		}
 	}
 

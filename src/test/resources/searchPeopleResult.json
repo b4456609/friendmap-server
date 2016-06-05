@@ -1,0 +1,13 @@
+{
+  "type": "searchPeopleResult",
+  "search": [
+    {
+      "name": "王建民",
+      "id": "2134548458"
+    },
+    {
+      "name": "Tom",
+      "id": "2134548457"
+    }
+   ]
+}

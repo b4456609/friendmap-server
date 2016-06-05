@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
+import java.util.List;
 
 /**
  * Created by bernie on 2016/6/5.
@@ -25,11 +26,10 @@ public class SearchPeopleStrategy extends ReceviceAndResponse {
 
     }
 
-    @Override
-    public void response() {
+    public static String responseString(List<User> waittingUsers){
         JSONObject jsonObj = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (User user : app.getWaittingUsers()) {
+        for (User user : waittingUsers) {
             JSONObject userObj = new JSONObject();
             userObj.put("name", user.getName());
             userObj.put("id", user.getId());
@@ -39,6 +39,11 @@ public class SearchPeopleStrategy extends ReceviceAndResponse {
         jsonObj.put("type", "searchPeopleResult");
         jsonObj.put("search", jsonArray);
 
-        session.getAsyncRemote().sendText(jsonObj.toString());
+        return jsonObj.toString();
+    }
+
+    @Override
+    public void response() {
+        session.getAsyncRemote().sendText(responseString(app.getWaittingUsers()));
     }
 }

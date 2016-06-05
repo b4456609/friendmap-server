@@ -29,7 +29,7 @@ public class CreateGroupStrategy extends ReceviceAndResponse {
     @Override
     public void action() {
         isSuccess = true;
-        User owner = app.getUserIdusers().get(userId);
+        owner = app.getUserIdusers().get(userId);
         Group group = new Group(groupName, groupId, owner);
         // add to group list
         app.getGroups().add(group);
@@ -44,10 +44,10 @@ public class CreateGroupStrategy extends ReceviceAndResponse {
         }
     }
 
-    public String responseString(){
+    public static String responseString(boolean isSuccess){
         JSONObject jsonObj = new JSONObject();
-        jsonObj.put("type", "CreateGroupResult");
-        if (isSuccess == true) {
+        jsonObj.put("type", "createGroupResult");
+        if (isSuccess) {
             jsonObj.put("status", "success");
         }
         return jsonObj.toString();
@@ -55,6 +55,6 @@ public class CreateGroupStrategy extends ReceviceAndResponse {
 
     @Override
     public void response() {
-        owner.sendMessage(responseString());
+        owner.sendMessage(responseString(isSuccess));
     }
 }
