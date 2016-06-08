@@ -10,58 +10,32 @@ import javax.websocket.Session;
  */
 public class User {
 
-	/**
-	 * Default constructor
-	 */
-
-	/**
-	 * 
-	 */
 	private Session session;
-
-	/**
-	 * 
-	 */
 	private String id;
-
-	/**
-	 * 
-	 */
 	private String name;
-
-	/**
-	 * 
-	 */
 	private GPS gps;
-
-	/**
-	 * 
-	 */
-	private Accerlations accerlations;
+	private Accelerations accelerations;
+	private Status status;
 
 	public User(Session session, String id, String name) {
 		this.session = session;
 		this.id = id;
 		this.name = name;
 		this.gps = new GPS();
-		this.accerlations = new Accerlations();
+		this.accelerations = new Accelerations();
+		this.status = new Status();
 	}
 
-	/**
-	 * @param lon
-	 * @param lat
-	 */
-	public void updateLocation(double lon, double lat) {
-		// TODO implement here
+	public void updateLocation(double lon, double lat, long timestamp) {
+		gps.addLocation(lon, lat, timestamp);
 	}
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param z
-	 */
-	public void updateAccerlation(double x, double y, double z) {
-		// TODO implement here
+	public void updateAcceleration(double x, double y, double z, long timestamp) {
+		accelerations.addAcceleration(x, y, z, timestamp);
+	}
+	
+	public void updateStatus(String status, long timestamp) {
+		this.status.setStatus(status, timestamp);
 	}
 
 	/**
@@ -108,17 +82,17 @@ public class User {
 		this.gps = gps;
 	}
 
-	public Accerlations getAccerlations() {
-		return accerlations;
+	public Accelerations getAccelerations() {
+		return accelerations;
 	}
 
-	public void setAccerlations(Accerlations accerlations) {
-		this.accerlations = accerlations;
+	public void setAccelerations(Accelerations accelerations) {
+		this.accelerations = accelerations;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", gps=" + gps + ", accerlations=" + accerlations + "]";
+		return "User [id=" + id + ", name=" + name + ", gps=" + gps + ", accelerations=" + accelerations + "]";
 	}
 
 }

@@ -1,34 +1,19 @@
 package ntou.wbse.user;
 
-
 import java.util.*;
 
-/**
- * 
- */
 public class Location {
 
-    /**
-     * Default constructor
-     */
-    public Location() {
-    }
-
-    /**
-     * 
-     */
     private double lon;
-
-    /**
-     * 
-     */
     private double lat;
-
-    /**
-     * 
-     */
     private long timestamp;
 
+    public Location(double lon, double lat, long timestamp) {
+    	this.lon = lon;
+    	this.lat = lat;
+    	this.timestamp = timestamp;
+    }
+    
 	public double getLon() {
 		return lon;
 	}

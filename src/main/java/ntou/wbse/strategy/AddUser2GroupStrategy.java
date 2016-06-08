@@ -14,6 +14,7 @@ public class AddUser2GroupStrategy extends ReceviceAndResponse {
 	private String userId;
 	private long groupId;
 	private Group group;
+	
 	private boolean isSuccess;
 	private String message;
 
@@ -55,6 +56,8 @@ public class AddUser2GroupStrategy extends ReceviceAndResponse {
 
 			jsonObj.put("type", "addUser2Group");
 			jsonObj.put("status", "success");
+			//User user = app.getUserIdusers().get(userId);
+			//jsonObj.put("userAddedID", user.getId());
 			jsonObj.put("groupId", group.getId());
 			jsonObj.put("user", jsonArray);
 		}

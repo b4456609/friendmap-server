@@ -3,6 +3,7 @@ package ntou.wbse.strategy;
 import ntou.wbse.App;
 import ntou.wbse.user.User;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 import javax.websocket.Session;
 
@@ -14,13 +15,14 @@ public class AddUserStrategy extends ReceviceAndResponse {
     private final App app;
     private final String id;
     private final String name;
+    
     private Session session;
 
-    public AddUserStrategy(App app, JSONObject json, Session session){
-        this.session = session;
-        this.app = app;
-        this.name = json.getString("name");
-        this.id = json.getString("id");
+    public AddUserStrategy(App app, JSONObject json, Session session) {
+        	this.session = session;
+            this.app = app;
+            this.name = json.getString("name");
+            this.id = json.getString("id");
     }
 
     @Override

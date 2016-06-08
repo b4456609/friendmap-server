@@ -4,34 +4,13 @@ import java.util.*;
 
 import ntou.wbse.user.User;
 
-/**
- * 
- */
 public class Group {
 
 	private String name;
-
-	/**
-	 * 
-	 */
 	private long id;
-
-	/**
-	 * 
-	 */
 	private List<User> members;
-
-	/**
-	 * 
-	 */
 	private User owner;
 
-	/**
-	 * Default constructor
-	 * 
-	 * @param id2
-	 * @param name
-	 */
 	public Group(String name, long id, User owner) {
 		this.id = id;
 		this.name = name;

@@ -97,29 +97,27 @@ public class FriendmapController {
 			break;
 		case "leaveGroup":
 			LOGGER.debug("leaveGroup");
-			String lUserId = json.getString("userId");
-			String lGroupId = json.getString("groupId");
+			strategy = new LeaveGroupStrategy(app, json);
+			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "updateLocation":
 			LOGGER.debug("updateLocation");
-			String ulUserId = json.getString("userId");
-			double lon = json.getDouble("lon");
-			double lat = json.getDouble("lat");
-			long ulTimestamp = json.getLong("timestamp");
+			strategy = new UpdateLocationStrategy(app, json);
+			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "updateAcceleration":
 			LOGGER.debug("updateAcceleration");
-			String uaUserId = json.getString("userId");
-			double x = json.getDouble("x");
-			double y = json.getDouble("y");
-			double z = json.getDouble("z");
-			long uaTimestamp = json.getLong("timestamp");
+			strategy = new UpdateAccelerationStrategy(app, json);
+			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		case "updateStatus":
 			LOGGER.debug("updateStatus");
-			String usUserId = json.getString("userId");
-			String status = json.getString("status");
-			long usTimestamp = json.getLong("timestamp");
+			strategy = new UpdateStatusStrategy(app, json);
+			strategy.execute();
+			LOGGER.debug(app.toString());
 			break;
 		default:
 			LOGGER.debug("Type error");
