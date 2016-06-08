@@ -17,7 +17,7 @@ public class User {
 	private GPS gps;
 	private Accelerations accelerations;
 	private Status status;
-
+/////
 	public User(Session session, Session webSession, String id, String name) {
 		this.session = session;
 		this.webSession = webSession;
