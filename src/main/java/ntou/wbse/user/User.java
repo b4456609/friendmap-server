@@ -11,14 +11,16 @@ import javax.websocket.Session;
 public class User {
 
 	private Session session;
+	private Session webSession;
 	private String id;
 	private String name;
 	private GPS gps;
 	private Accelerations accelerations;
 	private Status status;
 
-	public User(Session session, String id, String name) {
+	public User(Session session, Session webSession, String id, String name) {
 		this.session = session;
+		this.webSession = webSession;
 		this.id = id;
 		this.name = name;
 		this.gps = new GPS();
@@ -53,9 +55,15 @@ public class User {
 	public Session getSession() {
 		return session;
 	}
+	public Session getWebSession() {
+		return webSession;
+	}
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	public void setWebSession(Session webSession) {
+		this.webSession = webSession;
 	}
 
 	public String getId() {
