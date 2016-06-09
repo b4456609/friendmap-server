@@ -17,10 +17,8 @@ public class User {
 	private GPS gps;
 	private Accelerations accelerations;
 	private Status status;
-/////
-	public User(Session session, Session webSession, String id, String name) {
-		this.session = session;
-		this.webSession = webSession;
+
+	public User(String id, String name) {
 		this.id = id;
 		this.name = name;
 		this.gps = new GPS();
