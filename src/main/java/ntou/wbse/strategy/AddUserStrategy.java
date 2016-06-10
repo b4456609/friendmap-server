@@ -17,10 +17,14 @@ public class AddUserStrategy extends ReceviceAndResponse {
     private final App app;
     private final String id;
     private final String name;
+    private User user;
+    private boolean isSuccess;
+
     
     private Session session;
 
     public AddUserStrategy(App app, JSONObject json, Session session) {
+    		this.isSuccess = true;
         	this.session = session;
             this.app = app;
             this.name = json.getString("name");
@@ -30,7 +34,7 @@ public class AddUserStrategy extends ReceviceAndResponse {
     @Override
     public void action() {
     	if(!app.getUserIdusers().containsKey(id)){
-	        User user = new User(id, name);
+	        user = new User(id, name);
 	        user.setSession(session);
 	        app.getWaittingUsers().add(user);
 	        app.getUserIdusers().put(id, user);
@@ -40,20 +44,16 @@ public class AddUserStrategy extends ReceviceAndResponse {
     	}
     }
     
-	public static String responseString(Group group, boolean isSuccess) {
+	public static String responseString(User user, boolean isSuccess) {
 		JSONObject jsonObj = new JSONObject();
 		if (isSuccess) {
 			JSONArray jsonArray = new JSONArray();
-			for (User user : group.getMembers()) {
-				JSONObject userObj = new JSONObject();
-				userObj.put("name", user.getName());
-				userObj.put("id", user.getId());
-				jsonArray.put(userObj);
-			}
+			JSONObject userObj = new JSONObject();
+			userObj.put("name", user.getName());
+			userObj.put("id", user.getId());
+			jsonArray.put(userObj);
 
 			jsonObj.put("type", "addUser");
-			jsonObj.put("status", "success");
-			jsonObj.put("groupId", group.getId());
 			jsonObj.put("user", jsonArray);
 		}
 		else{
@@ -65,5 +65,6 @@ public class AddUserStrategy extends ReceviceAndResponse {
 	
     @Override
     public void response() {
+    	 user.sendMessage(responseString(user, isSuccess));
     }
 }
