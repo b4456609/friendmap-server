@@ -40,11 +40,16 @@ public class LeaveGroupStrategy extends ReceviceAndResponse {
 
 			// add to waitting user
 			app.getWaittingUsers().add(user);
+			
+			// if group are no member in it remove it
+			app.getGroups().remove(group);
+			app.getUserIdGroup().remove(user.getId(), group);
 		}
 	}
 	
 	public static String responseString(Group group, boolean isSuccess) {
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("type", "leaveGroup");
 		if (isSuccess) {
 			JSONArray jsonArray = new JSONArray();
 			for (User user : group.getMembers()) {
@@ -54,8 +59,7 @@ public class LeaveGroupStrategy extends ReceviceAndResponse {
 				jsonArray.put(userObj);
 			}
 
-			jsonObj.put("type", "leaveGroup");
-			jsonObj.put("userId", group.getOwner().getId());
+			jsonObj.put("user", jsonArray);
 			jsonObj.put("groupId", group.getId());
 			
 		}
