@@ -11,7 +11,6 @@ public class GPS {
     }
     
     public void addLocation(double lon, double lat, long timestamp) {
-    	int i;
     	Location loc = new Location(lon, lat, timestamp);
     	
     	if ( locations.size() == 1000 ) 
