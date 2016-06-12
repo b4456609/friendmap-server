@@ -12,12 +12,11 @@ public class GPS {
     
     public void addLocation(double lon, double lat, long timestamp) {
     	int i;
-    	
     	Location loc = new Location(lon, lat, timestamp);
+    	
+    	if ( locations.size() == 1000 ) 
+    			locations.remove(0); 
     	locations.add(loc);
-    	if ( locations.size() > 1000 ) 
-    		for (i=1; i<=1000; i++)
-    			locations.set(i-1, locations.get(i)); 
     }
 
 	public List<Location> getLocations() {

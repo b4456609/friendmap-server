@@ -12,12 +12,11 @@ public class Accelerations {
 
     public void addAcceleration(double x, double y, double z, long timestamp) {
     	int i;
-    	
     	Acceleration acc = new Acceleration(x, y, z, timestamp);
+    	
+    	if ( accelerations.size() == 1000 )
+    		accelerations.remove(0);
     	accelerations.add(acc);
-    	if ( accelerations.size() > 1000 ) 
-    		for (i=1; i<=1000; i++)
-    			accelerations.set(i-1, accelerations.get(i)); 
     }
 
 	public List<Acceleration> getAccelerations() {
