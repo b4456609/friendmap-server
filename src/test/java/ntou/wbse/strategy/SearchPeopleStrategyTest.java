@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 public class SearchPeopleStrategyTest {
     @Test
     public void responseString() throws Exception {
-        User user1 = new User(null, "2134548458", "王建民");
-        User user = new User(null, "2134548457", "Tom");
+        User user1 = new User("2134548458", "王建民");
+        User user = new User("2134548457", "Tom");
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
         users.add(user);

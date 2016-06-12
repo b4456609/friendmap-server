@@ -55,9 +55,9 @@ public class LeaveGroupStrategy extends ReceviceAndResponse {
 			}
 
 			jsonObj.put("type", "leaveGroup");
-			jsonObj.put("status", "success");
+			jsonObj.put("userId", group.getOwner().getId());
 			jsonObj.put("groupId", group.getId());
-			jsonObj.put("user", jsonArray);
+			
 		}
 		else{
 			jsonObj.put("status", "fail");
