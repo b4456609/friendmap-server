@@ -98,7 +98,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", gps=" + gps + ", accelerations=" + accelerations + "]";
+		return "User [session=" + session + ", webSession=" + webSession + ", id=" + id + ", name=" + name + ", gps="
+				+ gps + ", accelerations=" + accelerations + ", status=" + status + "]";
 	}
-
 }
