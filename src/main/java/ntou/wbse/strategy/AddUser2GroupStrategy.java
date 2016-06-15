@@ -36,7 +36,6 @@ public class AddUser2GroupStrategy extends ReceviceAndResponse {
 			// find group and user and add user to group
 			group = app.getGroupById(groupId);
 			User user = app.getUserIdusers().get(userId);
-			app.getUserIdGroup().put(user.getId(), group);
 			group.addUser2Group(user);
 
 			// remove from waitting user
