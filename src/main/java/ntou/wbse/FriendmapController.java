@@ -75,55 +75,46 @@ public class FriendmapController {
 			LOGGER.debug("addUser");
 			strategy = new AddUserStrategy(app, json, userSession);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "webAppLogin":
 			LOGGER.debug("webAppLogin");
 			strategy = new UpdateStatusStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "createGroup":
 			LOGGER.debug("createGroup");
 			strategy = new CreateGroupStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "searchPeople":
 			LOGGER.debug("searchPeople");
 			strategy = new SearchPeopleStrategy(app, userSession);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "addUser2Group":
 			LOGGER.debug("addUser2Group");
 			strategy = new AddUser2GroupStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "leaveGroup":
 			LOGGER.debug("leaveGroup");
 			strategy = new LeaveGroupStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "updateLocation":
 			LOGGER.debug("updateLocation");
 			strategy = new UpdateLocationStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "updateAcceleration":
 			LOGGER.debug("updateAcceleration");
 			strategy = new UpdateAccelerationStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		case "updateStatus":
 			LOGGER.debug("updateStatus");
 			strategy = new UpdateStatusStrategy(app, json);
 			strategy.execute();
-			LOGGER.debug(app.toString());
 			break;
 		
 		default:

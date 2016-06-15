@@ -15,7 +15,7 @@ public class UpdateLocationStrategy extends ReceviceAndResponse {
 	private double lon;
 	private double lat;
 	private long timestamp;
-	
+
 	private boolean isSuccess;
 	private String message;
 
@@ -42,7 +42,21 @@ public class UpdateLocationStrategy extends ReceviceAndResponse {
 		}
 	}
 
+	public static String responseString(String userId, Double lon, Double lat, long timestamp) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("type", "updateLocation");
+		jsonObj.put("lon", lon);
+		jsonObj.put("lat", lat);
+		jsonObj.put("userId", userId);
+		jsonObj.put("timestamp", timestamp);
+
+		return jsonObj.toString();
+	}
+
 	@Override
 	public void response() {
+		Group group = app.getUserIdGroup().get(userId);
+		if (group != null)
+			group.sendMessageFromUserId(userId, responseString(userId, lon, lat, timestamp));
 	}
 }

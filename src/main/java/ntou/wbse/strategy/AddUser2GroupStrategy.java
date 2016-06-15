@@ -5,11 +5,15 @@ import ntou.wbse.user.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ntou.wbse.App;
 
 public class AddUser2GroupStrategy extends ReceviceAndResponse {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AddUser2GroupStrategy.class);
+	
 	private App app;
 	private String userId;
 	private long groupId;
@@ -32,14 +36,20 @@ public class AddUser2GroupStrategy extends ReceviceAndResponse {
 
 	@Override
 	public void action() {
-		if (isSuccess) {
+		try{
 			// find group and user and add user to group
 			group = app.getGroupById(groupId);
 			User user = app.getUserIdusers().get(userId);
+			LOGGER.debug(user.toString());
+			LOGGER.debug(group.toString());
 			group.addUser2Group(user);
-
+			app.getUserIdGroup().put(userId, group);
 			// remove from waitting user
 			app.getWaittingUsers().remove(user);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			isSuccess = false;
 		}
 	}
 
@@ -59,6 +69,7 @@ public class AddUser2GroupStrategy extends ReceviceAndResponse {
 			//User user = app.getUserIdusers().get(userId);
 			//jsonObj.put("userAddedID", user.getId());
 			jsonObj.put("groupId", group.getId());
+			jsonObj.put("groupName", group.getName());
 			jsonObj.put("user", jsonArray);
 		}
 		else{

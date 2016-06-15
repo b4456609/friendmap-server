@@ -43,7 +43,8 @@ public class User {
 	 */
 	public void sendMessage(String message) {
 		try {
-			session.getBasicRemote().sendText(message);
+			if(session.isOpen())
+				session.getBasicRemote().sendText(message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

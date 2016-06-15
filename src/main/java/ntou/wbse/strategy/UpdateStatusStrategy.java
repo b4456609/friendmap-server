@@ -39,8 +39,21 @@ public class UpdateStatusStrategy extends ReceviceAndResponse {
 			user.updateStatus(status, timestamp);
 		}
 	}
+	
+	public static String responseString(String userId, String status, long timestamp) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("type", "updateStatus");
+		jsonObj.put("userId", userId);
+		jsonObj.put("status", status);
+		jsonObj.put("timestamp", timestamp);
+
+		return jsonObj.toString();
+	}
 
 	@Override
 	public void response() {
+		Group group = app.getUserIdGroup().get(userId);
+		if(group != null)
+			group.sendMessageFromUserId(userId, responseString(userId, status, timestamp));
 	}
 }
