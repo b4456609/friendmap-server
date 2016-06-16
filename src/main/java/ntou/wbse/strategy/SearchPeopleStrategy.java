@@ -23,7 +23,7 @@ public class SearchPeopleStrategy extends ReceviceAndResponse {
 
     @Override
     public void action() {
-    	
+		app.cleanLeaveUser();
     }
 
     public static String responseString(List<User> waittingUsers){

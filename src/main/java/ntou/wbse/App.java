@@ -2,6 +2,8 @@ package ntou.wbse;
 
 import java.util.*;
 
+import javax.websocket.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,6 +94,15 @@ public class App {
 			}
 		}
 		return null;
+	}
+	
+	public void cleanLeaveUser(){
+		for(User user : waittingUsers){
+			if(!user.getSession().isOpen()){
+				waittingUsers.remove(user);
+			}
+		}
+		LOGGER.debug(waittingUsers.toString());
 	}
 
 	@Override
